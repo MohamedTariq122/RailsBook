@@ -1,5 +1,9 @@
 <div>
   <h1 class="font-bold text-4xl text-blue-600">Home</h1>
-  <p>Welcome to our new App</p>
+  <% if user_signed_in? %>
+    <p>Welcome, <%= current_user.email %>!</p>
+  <% else %>
+    <p>Welcome, Guest!</p>
+  <% end %>
   <p>Enjoy your stay!</p>
 </div>
