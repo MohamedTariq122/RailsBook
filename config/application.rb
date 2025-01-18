@@ -6,6 +6,12 @@ require "rails/all"
 # you've limited to :test, :development, or :production.
 Bundler.require(*Rails.groups)
 
+# Load .env file in development and test environments
+if Rails.env.development? || Rails.env.test?
+  Dotenv::Rails.load
+end
+
+
 module RailsBook
   class Application < Rails::Application
     # Initialize configuration defaults for originally generated Rails version.

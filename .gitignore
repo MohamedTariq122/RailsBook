@@ -35,3 +35,5 @@
 
 /app/assets/builds/*
 !/app/assets/builds/.keep
+
+/home/mohamed-tariq/RailsBook/app/root/.env
