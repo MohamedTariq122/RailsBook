@@ -11,8 +11,8 @@ Rails.application.routes.draw do
   # get "manifest" => "rails/pwa#manifest", as: :pwa_manifest
   # get "service-worker" => "rails/pwa#service_worker", as: :pwa_service_worker
 
-  get 'categories/:category', to: 'posts#index', as: :category
-  get 'about', to: 'pages#about'
+  get "categories/:category", to: "posts#index", as: :category
+  get "about", to: "pages#about"
 
   # Defines the root path route ("/")
   root "home#index"

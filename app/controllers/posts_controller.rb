@@ -1,7 +1,7 @@
 class PostsController < ApplicationController
-before_action :authenticate_user!, only: [:create, :edit, :update, :destroy]
-before_action :set_post, only: [:show, :edit, :update, :destroy]
-before_action :check_post_ownership, only: [:edit, :update, :destroy]
+before_action :authenticate_user!, only: [ :create, :edit, :update, :destroy ]
+before_action :set_post, only: [ :show, :edit, :update, :destroy ]
+before_action :check_post_ownership, only: [ :edit, :update, :destroy ]
 
   def index
     @posts = if params[:search].present?
@@ -24,7 +24,7 @@ before_action :check_post_ownership, only: [:edit, :update, :destroy]
   def create
     @post = current_user.posts.build(post_params)
     if @post.save
-      redirect_to @post, notice: 'Post was successfully created.'
+      redirect_to @post, notice: "Post was successfully created."
     else
       render :new
     end
@@ -35,7 +35,7 @@ before_action :check_post_ownership, only: [:edit, :update, :destroy]
 
   def update
     if @post.update(post_params)
-      redirect_to @post, notice: 'Post was successfully updated.'
+      redirect_to @post, notice: "Post was successfully updated."
     else
       render :edit
     end
@@ -43,7 +43,7 @@ before_action :check_post_ownership, only: [:edit, :update, :destroy]
 
   def destroy
     @post.destroy
-    redirect_to posts_url, notice: 'Post was successfully destroyed.'
+    redirect_to posts_url, notice: "Post was successfully destroyed."
   end
 
   private
@@ -54,7 +54,7 @@ before_action :check_post_ownership, only: [:edit, :update, :destroy]
 
 def check_post_ownership
 unless @post.editable_by?(current_user)
-    redirect_to posts_path, alert: 'You are not authorized to perform this action.'
+    redirect_to posts_path, alert: "You are not authorized to perform this action."
 end
 end
 

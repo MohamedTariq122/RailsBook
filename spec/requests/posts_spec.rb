@@ -10,7 +10,7 @@ RSpec.describe "Posts", type: :request do
 
   describe "GET /posts/:id" do
     let(:post) { create(:post) }
-    
+
     it "allows guest users to view individual posts" do
       get post_path(post)
       expect(response).to have_http_status(200)
