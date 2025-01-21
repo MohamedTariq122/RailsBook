@@ -1,9 +1,15 @@
-<div>
-  <h1 class="font-bold text-4xl text-blue-600">Home</h1>
-  <% if user_signed_in? %>
-    <p>Welcome, <%= current_user.email %>!</p>
-  <% else %>
-    <p>Welcome, Guest!</p>
-  <% end %>
-  <p>Enjoy your stay!</p>
+<div class="min-h-screen bg-gray-50 py-12 px-4 sm:px-6 lg:px-8">
+  <div class="max-w-md w-full mx-auto space-y-8">
+    <h1 class="font-bold text-4xl text-[#D30001] text-center mb-8">Welcome to RailsBook</h1>
+    
+    <div class="bg-white p-6 rounded-lg shadow-md">
+      <% if user_signed_in? %>
+        <p class="text-lg text-gray-700">Welcome back, <span class="font-semibold"><%= current_user.email %></span>!</p>
+      <% else %>
+        <p class="text-lg text-gray-700">Welcome, Guest!</p>
+      <% end %>
+      
+      <p class="mt-4 text-gray-600">Enjoy your stay and connect with others!</p>
+    </div>
+  </div>
 </div>

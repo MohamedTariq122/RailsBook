@@ -1,11 +1,37 @@
+<div class="container mx-auto px-4">
+  <div class="flex justify-between items-center mb-6">
+    <h1 class="text-3xl font-bold text-[#D30001]">Posts</h1>
+    <%= link_to 'New Post', new_post_path, class: "bg-[#D30001] hover:bg-[#B30001] text-white font-bold py-2 px-4 rounded" %>
+  </div>
 
-<%= link_to 'New Post', new_post_path, class: "bg-blue-500 hover:bg-blue-700 text-white font-bold py-2 px-4 rounded" %>
-<ul>
-  <% @posts.each do |post| %>
-    <li>
-      <%= link_to post.title, post %>
-      <%= link_to 'Edit', edit_post_path(post), class: "bg-yellow-500 hover:bg-yellow-700 text-white font-bold py-2 px-4 rounded" %>
-      <%= link_to 'Destroy', post, method: :delete, data: { confirm: 'Are you sure?' }, class: "bg-red-500 hover:bg-red-700 text-white font-bold py-2 px-4 rounded" %>
-    </li>
-  <% end %>
-</ul>
+  <div class="space-y-6">
+    <div class="flex flex-col md:flex-row justify-between items-center gap-4">
+      <div class="flex gap-4 items-center">
+        <%= render 'shared/search' %>
+      </div>
+    </div>
+
+    <% if @posts.any? %>
+      <div class="grid gap-6 md:grid-cols-2 lg:grid-cols-3">
+        <% @posts.each do |post| %>
+          <div class="bg-white rounded-lg shadow-md overflow-hidden">
+            <div class="p-6">
+              <h2 class="text-xl font-semibold mb-2"><%= link_to post.title, post, class: "text-blue-600 hover:text-blue-800" %></h2>
+              <p class="text-gray-600 mb-4"><%= truncate(post.content, length: 100) %></p>
+              <div class="flex space-x-2">
+                <%= link_to 'Edit', edit_post_path(post), class: "bg-yellow-500 hover:bg-yellow-700 text-white font-bold py-1 px-3 rounded text-sm" %>
+                <%= link_to 'Delete', post, method: :delete, data: { turbo_confirm: 'Are you sure?' }, class: "bg-red-500 hover:bg-red-700 text-white font-bold py-1 px-3 rounded text-sm" %>
+              </div>
+            </div>
+          </div>
+        <% end %>
+      </div>
+    <% else %>
+      <div class="text-center py-10">
+        <p class="text-gray-500">
+          <%= params[:search].present? ? "No posts found matching '#{params[:search]}'" : "No posts yet" %>
+        </p>
+      </div>
+    <% end %>
+  </div>
+</div>

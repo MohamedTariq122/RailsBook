@@ -1,11 +1,9 @@
 # Read about fixtures at https://api.rubyonrails.org/classes/ActiveRecord/FixtureSet.html
 
 one:
-  title: MyString
-  content: MyText
-  user: one
+  content: "Test post content"
+  user: one    # references users fixture
 
 two:
-  title: MyString
-  content: MyText
-  user: two
+  content: "Another test post"
+  user: two    # references users fixture

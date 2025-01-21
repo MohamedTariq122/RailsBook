@@ -23,13 +23,47 @@
     <%= javascript_importmap_tags %>
   </head>
 
-  <body>
-    <div>
-     <%= render 'shared/nav' %>
-     <%= link_to 'Posts', posts_path, class: "bg-blue-500 hover:bg-blue-700 text-white font-bold py-2 px-4 rounded content-center" %>
-    </div>
+  <body class="bg-gray-100">
+    <nav class="bg-white shadow-lg fixed w-full top-0 z-50">
+      <div class="container mx-auto px-6 py-3 flex justify-between items-center">
+        <div class="flex items-center space-x-4">
+          <%= link_to 'RailsBook', root_path, class: "text-2xl font-bold text-[#D30001]" %>
+          <%= link_to 'Posts', posts_path, class: "bg-[#D30001] hover:bg-[#B30001] text-white font-bold py-2 px-4 rounded" %>
+          <%= link_to 'About', about_path, class: "bg-[#D30001] hover:bg-[#B30001] text-white font-bold py-2 px-4 rounded" %>
+        </div>
+        
+        <div class="flex items-center space-x-4">
+          <% if user_signed_in? %>
+            <div class="flex items-center space-x-2">
+              <% if current_user.avatar.attached? %>
+                <%= image_tag current_user.avatar_thumbnail, class: "h-10 w-10 rounded-full" %>
+              <% else %>
+                <div class="h-10 w-10 rounded-full bg-gray-300 flex items-center justify-center">
+                  <span class="text-gray-600 text-sm"><%= current_user.email[0].upcase %></span>
+                </div>
+              <% end %>
+              <span class="text-gray-600"><%= current_user.email %></span>
+            </div>
+            <%= button_to 'Sign Out', destroy_user_session_path, method: :delete, class: "bg-red-500 hover:bg-red-700 text-white font-bold py-2 px-4 rounded" %>
+          <% else %>
+            <%= link_to 'Sign In', new_user_session_path, class: "bg-[#D30001] hover:bg-[#B30001] text-white font-bold py-2 px-4 rounded" %>
+          <% end %>
+        </div>
+      </div>
+    </nav>
     
-    <main class="container mx-auto mt-28 px-5 flex">
+    <main class="container mx-auto px-4 pt-20 pb-8">
+      <% if notice %>
+        <div class="bg-[#fff5f5] border border-[#D30001] text-[#D30001] px-4 py-3 rounded relative mb-4" role="alert">
+          <span class="block sm:inline"><%= notice %></span>
+        </div>
+      <% end %>
+      <% if alert %>
+        <div class="bg-red-100 border border-red-400 text-red-700 px-4 py-3 rounded relative mb-4" role="alert">
+          <span class="block sm:inline"><%= alert %></span>
+        </div>
+      <% end %>
+      
       <%= yield %>
     </main>
   </body>
