@@ -6,4 +6,5 @@ class User < ApplicationRecord
          :recoverable, :rememberable, :validatable
 
   has_one_attached :avatar  # Active Storage
+  has_many :comments, dependent: :destroy # dependent: :destroy ensures that when a user is deleted, all associated comments are also deleted
 end
